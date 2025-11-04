@@ -2,11 +2,11 @@
 
 
 **Overview**
-Everyday the workflow automatically does the following steps:
-1.Triggers at a specific time using Triggering Schedule
-2.Fetches the real-time stock prices for 10 companies from Yahoo Finance API via the RapidAPI
-3.Process and formats the data with a Python Code
-4.Sends a clean, readable stock summary email through Gmail
+  Everyday the workflow automatically does the following steps:
+    1.Triggers at a specific time using Triggering Schedule
+    2.Fetches the real-time stock prices for 10 companies from Yahoo Finance API via the RapidAPI
+    3.Process and formats the data with a Python Code
+    4.Sends a clean, readable stock summary email through Gmail
 
 
 **Tech Stack Used**
@@ -24,9 +24,9 @@ Gmail Node - send summary email
 
 
 **API Setup**
-Create an account on RapidAPI
-Subscribe to Yahoo Finance
-In the HTTP Request Node copy the X-RapidAPI-Key and X-RapidAPI-Host
+1. Create an account on RapidAPI
+2. Subscribe to Yahoo Finance
+3. In the HTTP Request Node copy the X-RapidAPI-Key and X-RapidAPI-Host
 
 
 # Daily-Stock-Price-tracker-n8n
