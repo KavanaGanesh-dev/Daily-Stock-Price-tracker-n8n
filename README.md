@@ -4,11 +4,11 @@ Automate daily stock price tracking using n8n, Python and Gmail. This workflow f
 **This project automates daily stock market updates using n8n, Python and Gmail**
 
 **Overview**
-  Everyday the workflow automatically does the following steps:
-    1. Triggers at a specific time using Triggering Schedule
-    2. Fetches the real-time stock prices for 10 companies from Yahoo Finance API via the RapidAPI
-    3. Process and formats the data with a Python Code
-    4. Sends a clean, readable stock summary email through Gmail
+Everyday the workflow automatically does the following steps:
+1. Triggers at a specific time using Triggering Schedule
+2. Fetches the real-time stock prices for 10 companies from Yahoo Finance API via the RapidAPI
+3. Process and formats the data with a Python Code
+4. Sends a clean, readable stock summary email through Gmail
 
 
 **Tech Stack Used**
