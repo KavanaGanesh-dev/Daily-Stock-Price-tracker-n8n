@@ -1,0 +1,136 @@
+{
+  "name": "Daily Stock Price Tracker",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7cf3fbff-389f-4db0-a5d3-1d6a2ec30127",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://yh-finance.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=AAPL,NVDA,GOOGL,MSFT,NOK,TSLA,AMZN,META,INTC,AMD",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-RapidAPI-Key",
+              "value": "cfa7d0454cmsh8ebe6bb15b92187p16447ajsnf58fe1d1ed5f"
+            },
+            {
+              "name": "X-RapidAPI-Host",
+              "value": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "04354ca8-2868-4799-9ae1-9735fa4baeaa",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "\n# Get the list of stocks from HTTP Request node\nstocks = items[0]['json']['quoteResponse']['result']  # adjust path if needed\n\n# Initialize the email body\nbody = \"Daily Stock Prices:\\n\\n\"\n\n# Add each stock to the email body\nfor stock in stocks:\n    symbol = stock['symbol']\n    price = stock['regularMarketPrice']\n    change_in_percent = stock['regularMarketChangePercent']\n    body += f\"{symbol}: ${price} ({change_in_percent}%)\\n\"\n\n# Return a single item containing the full email body\nreturn [{'json': {'body': body}}]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "fd07d518-bbba-4605-bbf6-86c841519611",
+      "name": "Extract Stock Info(Python)"
+    },
+    {
+      "parameters": {
+        "sendTo": "kavna.ganesh@gmail.com",
+        "subject": "Daily Stock Update",
+        "emailType": "text",
+        "message": "={{$json[\"body\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "f6f688e4-e80e-4b47-a608-5064ace15344",
+      "name": "Gmail SendNode",
+      "webhookId": "4f00c33b-e5e2-4a1d-865f-4d2e9fbe315f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4H59UjkrwyxTMjX6",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Extract Stock Info(Python)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Stock Info(Python)": {
+      "main": [
+        [
+          {
+            "node": "Gmail SendNode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f73e5427-e720-4717-881b-110a5d8a3833",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "35ffc7277711495d3ce2500bc1721bdc6c7a7e4aea650f057af04cad55f49714"
+  },
+  "id": "UplfKiZcg2R8WYIw",
+  "tags": []
+}
