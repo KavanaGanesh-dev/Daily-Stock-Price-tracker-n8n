@@ -3,17 +3,17 @@
 
 **Overview**
 Everyday the workflow automatically does the following steps:
-    1. Triggers at a specific time using Triggering Schedule
-    2. Fetches the real-time stock prices for 10 companies from Yahoo Finance API via the RapidAPI
-    3. Process and formats the data with a Python Code
-    4. Sends a clean, readable stock summary email through Gmail
+1.Triggers at a specific time using Triggering Schedule
+2.Fetches the real-time stock prices for 10 companies from Yahoo Finance API via the RapidAPI
+3.Process and formats the data with a Python Code
+4.Sends a clean, readable stock summary email through Gmail
 
 
 **Tech Stack Used**
-n8n - Workflow Automation Platform
-Python (n8n code node) - Data Processing and Formatting
-Rapid API (Yahoo Finance API) - Real Time stock data
-Gmail Node - Email Authentication
+1.n8n - Workflow Automation Platform
+2.Python (n8n code node) - Data Processing and Formatting
+3.Rapid API (Yahoo Finance API) - Real Time stock data
+4.Gmail Node - Email Authentication
 
 
 **Workflow Structure**
